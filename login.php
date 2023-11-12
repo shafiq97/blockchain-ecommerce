@@ -29,7 +29,11 @@ if (isset($_POST['submit'])) {
     if (password_verify($password, $user['password'])) {
       $_SESSION['logged'] = 1;
       // Redirect to a different page for logged in users
-      header('Location: index.php');
+      if ($user['role'] === 'admin') {
+        header('location: admin.php');
+      }else{
+        header('Location: index.php');
+      }
       exit;
     } else {
       $message = "Invalid username or password";
